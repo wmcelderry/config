@@ -1,0 +1,16 @@
+launch app
+
+Swap focus
+	- parent/child?
+	- cursors	(focus/move)
+	- jump		(focus/assign/move)
+
+fullscreen
+float
+
+pickup / drop (move window) - scratchpad
+
+create a new split (H,V,Tab,Stack)
+
+resize - F8 ?
+

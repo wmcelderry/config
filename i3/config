@@ -1,0 +1,235 @@
+
+set $mod Mod4 
+
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+focus_follows_mouse no
+
+
+
+bar {
+        status_command i3status
+}
+
+##############
+# Start Apps #
+##############
+
+# terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+bindsym $mod+Shift+f exec firefox
+
+#capture a screen shoot
+bindsym Print exec bash -c 'import -window $(xdotool getactivewindow) "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+
+# start dmenu (a program launcher)
+bindsym $mod+Shift+d exec dmenu_run
+
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+#########
+# Admin #
+#########
+
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Control+l exec i3lock
+
+
+
+##########################
+# Focus Control & Layout #
+##########################
+
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+mode "mark" {
+
+#bindsym 1	exec ~/.i3/scripts/focus.sh 1
+#bindsym f	exec ~/.i3/scripts/focus.sh f
+#bindsym t	exec ~/.i3/scripts/focus.sh t
+#bindsym c	exec ~/.i3/scripts/focus.sh c
+
+	bindsym 1	[con_mark="1"] focus ; mode "default"
+	bindsym 2	[con_mark="2"] focus ; mode "default"
+	bindsym 3	[con_mark="3"] focus ; mode "default"
+	bindsym 4	[con_mark="4"] focus ; mode "default"
+	bindsym 5	[con_mark="5"] focus ; mode "default"
+	bindsym 6	[con_mark="6"] focus ; mode "default"
+	bindsym 7	[con_mark="7"] focus ; mode "default"
+	bindsym 8	[con_mark="8"] focus ; mode "default"
+	bindsym 9	[con_mark="9"] focus ; mode "default"
+	bindsym 0	[con_mark="0"] focus ; mode "default"
+	bindsym w	[con_mark="w"] focus ; mode "default"	# web
+	bindsym e	[con_mark="e"] focus ; mode "default"	# email
+	bindsym f	[con_mark="f"] focus ; mode "default"
+	bindsym t	[con_mark="t"] focus ; mode "default"
+	bindsym c	[con_mark="c"] focus ; mode "default"	#config
+
+	bindsym space	exec i3-input -F '[con_mark="%s"] focus' -P 'Jump to a mark: ' ; mode "default"
+
+	bindsym Shift+1		mark "1" ; mode "default"
+	bindsym Shift+2		mark "2" ; mode "default"
+	bindsym Shift+3		mark "3" ; mode "default"
+	bindsym Shift+4		mark "4" ; mode "default"
+	bindsym Shift+5		mark "5" ; mode "default"
+	bindsym Shift+6		mark "6" ; mode "default"
+	bindsym Shift+7		mark "7" ; mode "default"
+	bindsym Shift+8		mark "8" ; mode "default"
+	bindsym Shift+9		mark "9" ; mode "default"
+	bindsym Shift+0		mark "0" ; mode "default"
+	bindsym Shift+w		mark "w" ; mode "default"
+	bindsym Shift+e		mark "e" ; mode "default"
+	bindsym Shift+f		mark "f" ; mode "default"
+	bindsym Shift+t		mark "t" ; mode "default"
+	bindsym Shift+c		mark "c" ; mode "default"
+
+
+	bindsym Shift+space	exec i3-input -F 'mark "%s"' -P 'Enter a mark: ' ; mode "default"
+
+#bindsym Mod1+1		move container to mark 1  ; mode "default"
+#bindsym Mod1+1		move scratchpad; [con_mark="1"] focus ; scratchpad show ;  floating disable ; mode "default"
+	bindsym Mod4+1		exec ~/.i3/scripts/move.sh 1
+	bindsym Mod4+2		exec ~/.i3/scripts/move.sh 2
+	bindsym Mod4+3		exec ~/.i3/scripts/move.sh 3
+	bindsym Mod4+4		exec ~/.i3/scripts/move.sh 4
+	bindsym Mod4+5		exec ~/.i3/scripts/move.sh 5
+	bindsym Mod4+6		exec ~/.i3/scripts/move.sh 6
+	bindsym Mod4+7		exec ~/.i3/scripts/move.sh 7
+	bindsym Mod4+8		exec ~/.i3/scripts/move.sh 8
+	bindsym Mod4+9		exec ~/.i3/scripts/move.sh 9
+	bindsym Mod4+0		exec ~/.i3/scripts/move.sh 0
+	bindsym Mod4+w		exec ~/.i3/scripts/move.sh w
+	bindsym Mod4+e		exec ~/.i3/scripts/move.sh e
+	bindsym Mod4+f		exec ~/.i3/scripts/move.sh f
+	bindsym Mod4+t		exec ~/.i3/scripts/move.sh t
+	bindsym Mod4+c		exec ~/.i3/scripts/move.sh c
+
+	bindsym Escape		mode "default"
+}
+
+bindsym Mod1+Tab mode "mark"
+
+
+# move window within layout
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+
+#Layout:
+########
+
+bindsym $mod+f fullscreen
+
+#floating_modifier $mod
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+# split in horizontal orientation
+bindsym $mod+b split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+#resize windows in layout.
+mode "resize" {
+        bindsym h           resize shrink width 10 px or 10 ppt
+        bindsym j           resize grow height 10 px or 10 ppt
+        bindsym k           resize shrink height 10 px or 10 ppt
+        bindsym l   resize grow width 10 px or 10 ppt
+
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+###
+# Scratchpad 
+######
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+#doesn't work on window groups - need to migrate up the tree to the top of the floating.
+bindsym $mod+ctrl+minus	scratchpad show ;  focus floating ; floating disable
+
+
+#mouse control to move re-arrange windows - doesn't work atm
+#bindsym Mod4+button1	exec i3-input -P "test" ; move scratchpad
+#bindsym Mod4+ctrl+button2	focus; scratchpad show ;  floating disable
+
+##############
+# Workspaces #
+##############
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
