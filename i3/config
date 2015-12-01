@@ -17,13 +17,18 @@ bar {
 # terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+# web browser
 bindsym $mod+Shift+f exec firefox
+bindsym $mod+c exec gnome-calculator
+
+#openscad
+#gnome-calculator
+#libreoffice?
 
 #capture a screen shoot
 #bindsym Print exec bash -c 'import -window $(xdotool getactivewindow) "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 #bindsym Print exec bash -c 'xwd -id $(xdotool getactivewindow) | convert - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Mod4+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 bindsym --release Mod4+x exec -no-startup-id bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 #bindsym Print exec bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
@@ -55,6 +60,11 @@ bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the power off sh
 bindsym $mod+Control+l exec i3lock
 
 
+########
+# Automatic tagging ? #
+########
+
+#for_window ...
 
 ##########################
 # Focus Control & Layout #
@@ -142,6 +152,27 @@ mode "mark" {
 	bindsym Mod4+c		exec ~/.i3/scripts/move.sh c
 
 	bindsym Escape		mode "default"
+	bindsym Return		mode "default"
+
+	bindsym Shift+h move left
+	bindsym Shift+j move down
+	bindsym Shift+k move up
+	bindsym Shift+l move right
+
+	bindsym Shift+Left move left
+	bindsym Shift+Down move down
+	bindsym Shift+Up move up
+	bindsym Shift+Right move right
+
+	bindsym h focus left
+	bindsym j focus down
+	bindsym k focus up
+	bindsym l focus right
+
+	bindsym Left focus left
+	bindsym Down focus down
+	bindsym Up focus up
+	bindsym Right focus right
 }
 
 bindsym Mod1+Tab mode "mark"
