@@ -50,7 +50,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the power off shortcut. Do you really want to power off this computer?' -b 'Yes, power off!' 'sudo poweroff'"
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the power off shortcut. Do you really want to power off this computer?' -b 'Yes, power off!' 'sudo /sbin/poweroff'"
 
 bindsym $mod+Control+l exec i3lock
 
@@ -96,11 +96,11 @@ mode "mark" {
 	bindsym 8	[con_mark="8"] focus ; mode "default"
 	bindsym 9	[con_mark="9"] focus ; mode "default"
 	bindsym 0	[con_mark="0"] focus ; mode "default"
-	bindsym w	[con_mark="w"] focus ; mode "default"	# web
-	bindsym e	[con_mark="e"] focus ; mode "default"	# email
+	bindsym w	[con_mark="w"] focus ; mode "default"
+	bindsym e	[con_mark="e"] focus ; mode "default"
 	bindsym f	[con_mark="f"] focus ; mode "default"
 	bindsym t	[con_mark="t"] focus ; mode "default"
-	bindsym c	[con_mark="c"] focus ; mode "default"	#config
+	bindsym c	[con_mark="c"] focus ; mode "default"
 
 	bindsym space	exec i3-input -F '[con_mark="%s"] focus' -P 'Jump to a mark: ' ; mode "default"
 
