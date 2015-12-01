@@ -1,4 +1,8 @@
 launch app
+	mod-shift
+
+admin
+	mod-control..
 
 Swap focus
 	- parent/child?
