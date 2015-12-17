@@ -24,6 +24,8 @@ bindsym $mod+c exec gnome-calculator
 #openscad
 #gnome-calculator
 #libreoffice?
+#text editor:
+bindsym $mod+t exec i3-sensible-terminal -e vim
 
 #capture a screen shoot
 bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
