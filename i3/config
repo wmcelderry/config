@@ -29,8 +29,8 @@ bindsym $mod+t exec i3-sensible-terminal -e vim
 
 #capture a screen shoot
 bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Alt+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Mod4+x exec -no-startup-id bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+#bindsym --release Mod4+x exec -no-startup-id bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 #bindsym Print exec bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
 # start dmenu (a program launcher)
