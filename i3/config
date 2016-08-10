@@ -106,11 +106,6 @@ bindsym $mod+a focus parent
 
 mode "mark" {
 
-#bindsym 1	exec ~/.i3/scripts/focus.sh 1
-#bindsym f	exec ~/.i3/scripts/focus.sh f
-#bindsym t	exec ~/.i3/scripts/focus.sh t
-#bindsym c	exec ~/.i3/scripts/focus.sh c
-
 	bindsym 1	[con_mark="1"] focus ; mode "default"
 	bindsym 2	[con_mark="2"] focus ; mode "default"
 	bindsym 3	[con_mark="3"] focus ; mode "default"
@@ -123,6 +118,7 @@ mode "mark" {
 	bindsym 0	[con_mark="0"] focus ; mode "default"
 	bindsym w	[con_mark="w"] focus ; mode "default"
 	bindsym e	[con_mark="e"] focus ; mode "default"
+	bindsym p	[con_mark="p"] focus ; mode "default"
 	bindsym f	[con_mark="f"] focus ; mode "default"
 	bindsym t	[con_mark="t"] focus ; mode "default"
 	bindsym c	[con_mark="c"] focus ; mode "default"
@@ -141,6 +137,7 @@ mode "mark" {
 	bindsym Shift+0		mark "0" ; mode "default"
 	bindsym Shift+w		mark "w" ; mode "default"
 	bindsym Shift+e		mark "e" ; mode "default"
+	bindsym Shift+p		mark "p" ; mode "default"
 	bindsym Shift+f		mark "f" ; mode "default"
 	bindsym Shift+t		mark "t" ; mode "default"
 	bindsym Shift+c		mark "c" ; mode "default"
@@ -249,10 +246,10 @@ bindsym $mod+r mode "resize"
 # Scratchpad 
 ######
 
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+# bindsym $mod+Shift+minus move scratchpad
+# bindsym $mod+minus scratchpad show
 #doesn't work on window groups - need to migrate up the tree to the top of the floating.
-bindsym $mod+ctrl+minus	scratchpad show ;  focus floating ; floating disable
+# bindsym $mod+ctrl+minus	scratchpad show ;  focus floating ; floating disable
 
 
 #mouse control to move re-arrange windows - doesn't work atm
@@ -263,26 +260,77 @@ bindsym $mod+ctrl+minus	scratchpad show ;  focus floating ; floating disable
 # Workspaces #
 ##############
 
+set $wsn1 "1: 'net"
+set $wsn2 "2: work"
+set $wsn3 "3: MS"
+set $wsn4 "4: todo"
+set $wsn5 "5: heating"
+set $wsn6 "6: networking"
+set $wsn7 "7: accounts"
+set $wsn8 "8: cine"
+set $wsn9 "9: games"
+set $wsn0 "0: 3d"
+set $wsnf1 "f1: config"
+set $wsnf2 "f2: std"
+set $wsnf3 "f3: std"
+set $wsnf4 "f4: std"
+set $wsnf5 "f5: std"
+set $wsnf6 "f6: std"
+set $wsnf7 "f7: std"
+set $wsnf8 "f8: std"
+set $wsnf9 "f9: std"
+set $wsnf10 "f10: std"
+set $wsnf11 "f11: std"
+set $wsnf12 "f12: std"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace $wsn1
+bindsym $mod+2 workspace $wsn2
+bindsym $mod+3 workspace $wsn3
+bindsym $mod+4 workspace $wsn4
+bindsym $mod+5 workspace $wsn5
+bindsym $mod+6 workspace $wsn6
+bindsym $mod+7 workspace $wsn7
+bindsym $mod+8 workspace $wsn8
+bindsym $mod+9 workspace $wsn9
+bindsym $mod+0 workspace $wsn0
+bindsym $mod+F1 workspace $wsnf1
+bindsym $mod+F2 workspace $wsnf2
+bindsym $mod+F3 workspace $wsnf3
+bindsym $mod+F4 workspace $wsnf4
+bindsym $mod+F5 workspace $wsnf5
+bindsym $mod+F6 workspace $wsnf6
+bindsym $mod+F7 workspace $wsnf7
+bindsym $mod+F8 workspace $wsnf8
+bindsym $mod+F9 workspace $wsnf9
+bindsym $mod+F10 workspace $wsnf10
+bindsym $mod+F11 workspace $wsnf11
+bindsym $mod+F12 workspace $wsnf12
+bindsym $mod+minus focus output left
+bindsym $mod+plus focus output right
+bindsym $mod+shift+minus move workspace to output left
+bindsym $mod+shift+plus move workspace to output right
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+shift+F1 move container to workspace $wsnf1
+bindsym $mod+shift+F2 move container to workspace $wsnf2
+bindsym $mod+shift+F3 move container to workspace $wsnf3
+bindsym $mod+shift+F4 move container to workspace $wsnf4
+bindsym $mod+shift+F5 move container to workspace $wsnf5
+bindsym $mod+shift+F6 move container to workspace $wsnf6
+bindsym $mod+shift+F7 move container to workspace $wsnf7
+bindsym $mod+shift+F8 move container to workspace $wsnf8
+bindsym $mod+shift+F9 move container to workspace $wsnf9
+bindsym $mod+shift+F10 move container to workspace $wsnf10
+bindsym $mod+shift+F11 move container to workspace $wsnf11
+bindsym $mod+shift+F12 move container to workspace $wsnf12
+bindsym $mod+shift+1 move container to workspace $wsn1
+bindsym $mod+shift+2 move container to workspace $wsn2
+bindsym $mod+shift+3 move container to workspace $wsn3
+bindsym $mod+shift+4 move container to workspace $wsn4
+bindsym $mod+shift+5 move container to workspace $wsn5
+bindsym $mod+shift+6 move container to workspace $wsn6
+bindsym $mod+shift+7 move container to workspace $wsn7
+bindsym $mod+shift+8 move container to workspace $wsn8
+bindsym $mod+shift+9 move container to workspace $wsn9
+bindsym $mod+shift+0 move container to workspace $wsn0
