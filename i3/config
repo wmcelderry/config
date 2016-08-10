@@ -17,35 +17,43 @@ bar {
 # terminal
 bindsym $mod+Return exec i3-sensible-terminal
 
+mode "launch" {
+
 # web browser
-bindsym $mod+Shift+f exec firefox
-bindsym $mod+c exec gnome-calculator
+	bindsym f exec firefox ; mode "default"
+	bindsym c exec gnome-calculator ; mode "default"
+	bindsym p exec linphone ; mode "default"
+	bindsym t exec thunderbird ; mode "default"
+	bindsym x exec i3-sensible-terminal -e vim ; mode "default"
+	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
-#openscad
-#gnome-calculator
-#libreoffice?
-#text editor:
-bindsym $mod+t exec i3-sensible-terminal -e vim
-
-#capture a screen shoot
-bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-#bindsym --release Mod4+x exec -no-startup-id bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-#bindsym Print exec bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+	bindsym w exec libreoffice --writer ; mode "default"
+	bindsym Shift+c exec libreoffice --calc ; mode "default"
+	bindsym i exec libreoffice --impress ; mode "default"
+}
 
 # start dmenu (a program launcher)
 bindsym $mod+Shift+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+
+#capture a screen shot
+bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+
+#bindsym --release Mod4+x exec -no-startup-id bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+#bindsym Print exec bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+
 
 ############################
 # Config for starting apps #
 ############################
 #for_window [title=" "] move container to workspace 1
+for_window [instance="Mail" class="Thunderbird"] mark "e"
+for_window [instance="Navigator" class="Firefox"] mark "w"
+for_window [instance="linphone" class="Linphone"] mark "p"
 
 
 #########
@@ -183,6 +191,7 @@ mode "mark" {
 }
 
 bindsym Mod1+Tab mode "mark"
+bindsym Mod4+space mode "launch"
 
 
 # move window within layout
