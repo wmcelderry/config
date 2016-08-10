@@ -22,8 +22,8 @@ set autochdir
 " nnoremap <Leader>s :let @x=@" \| let @"=@a \| let @a=@b \| let @b=@x<CR>
 " move the data in " to z
 " delete the movement command, past the data in z.
-nnoremap _a :let @z=@"
-nnoremap _b dw"zP
+nnoremap _a :let @z=@<CR>
+nnoremap _b de"zP
 
 " Easier working with tabs.
 nnoremap tn :tabn<CR>
