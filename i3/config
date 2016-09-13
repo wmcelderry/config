@@ -22,10 +22,10 @@ bindsym $mod+Return exec i3-sensible-terminal
 mode "launch" {
 
 # web browser
-	bindsym f exec firefox ; mode "default"
+	bindsym w exec iceweasel ; mode "default"
 	bindsym c exec gnome-calculator ; mode "default"
 	bindsym p exec linphone ; mode "default"
-	bindsym t exec thunderbird ; mode "default"
+	bindsym e exec icedove ; mode "default"
 	bindsym x exec i3-sensible-terminal -e vim ; mode "default"
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
