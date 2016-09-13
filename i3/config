@@ -4,6 +4,8 @@ set $mod Mod4
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 focus_follows_mouse no
 
+force_xinerama yes
+
 
 
 bar {
