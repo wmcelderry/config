@@ -1,83 +1,107 @@
 
+
+
+################
+# System setup #
+################
+
+set $BROWSER iceweasel
+set $BROWSER_WINCLASS Firefox
+
+set $EMAIL icedove
+set $EMAIL_WINCLASS Icedove
+
+set $PHONE linphone
+set $PHONE_WINCLASS Linphone
+
+set $TERM rxvt
+
+set $CALC rxvt -e bc
+set $TEXT rxvt -e vim
+
+set $WORD libreoffice --writer
+set $SSHEET libreoffice --calc
+set $PRESENT libreoffice --impress
+
+
+##################
+# General Config #
+##################
+
 set $mod Mod4 
-
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 focus_follows_mouse no
+font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 
+#show_marks yes
 
 bar {
         status_command i3status
 }
 
-##############
-# Start Apps #
-##############
+
+##################
+# Launching Apps #
+##################
 
 # terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec $TERM
 
+bindsym Mod4+space mode "launch"
 mode "launch" {
 
 # web browser
-	bindsym w exec iceweasel ; mode "default"
-	bindsym e exec icedove ; mode "default"
-	bindsym c exec rxvt -e bc ; mode "default"
-	bindsym p exec linphone ; mode "default"
-	bindsym x exec i3-sensible-terminal -e vim ; mode "default"
+	bindsym w exec $BROWSER ; mode "default"
+	bindsym e exec $EMAIL ; mode "default"
+	bindsym c exec $CALC ; mode "default"
+	bindsym p exec $PHONE ; mode "default"
+	bindsym t exec $TEXT ; mode "default"
+
+	bindsym w exec $WORD ; mode "default"
+	bindsym s exec $SSHEET ; mode "default"
+	bindsym i exec $PRESENT ; mode "default"
+
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
-	bindsym w exec libreoffice --writer ; mode "default"
-	bindsym Shift+c exec libreoffice --calc ; mode "default"
-	bindsym i exec libreoffice --impress ; mode "default"
+	bindsym Shift+d exec dmenu_run
+	bindsym d exec --no-startup-id i3-dmenu-desktop
+	bindsym Space exec --no-startup-id i3-dmenu-desktop
+
+	bindsym Escape mode default
+	bindsym Return mode default
 }
-
-# start dmenu (a program launcher)
-bindsym $mod+Shift+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-
 
 
 #capture a screen shot
 bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
-#bindsym --release Mod4+x exec -no-startup-id bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-#bindsym Print exec bash -c 'import "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
-
-############################
-# Config for starting apps #
-############################
-for_window [instance="Mail" class="Thunderbird"] mark "e"
-for_window [instance="Mail" class="Icedove"] mark "e"
-for_window [instance="Navigator" class="Firefox"] mark "w"
-for_window [instance="Navigator" class="Iceweasel"] mark "w" #Still uses firefox at time of writing... xprop | grep WM_CLASS
-for_window [instance="linphone" class="Linphone"] mark "p"
+#################################
+# Auto config for starting apps #
+#################################
+for_window [instance="Mail" class="${EMAIL_WINCLASS}"] mark "e"
+for_window [instance="Navigator" class="$BROWSER_WINCLASS"] mark "w"
+for_window [instance="linphone" class="$PHONE_WINCLASS"] mark "p"
 
 
 #########
 # Admin #
 #########
 
+set $cmod Control
 
-# kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+$cmod+q kill
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'You pressed the power off shortcut. Do you really want to power off this computer?' -b 'Yes, power off!' 'sudo /sbin/poweroff'"
-
-bindsym $mod+Control+l exec i3lock
+bindsym $mod+$cmod+r restart
+bindsym $mod+$cmod+c reload
+bindsym $mod+$cmod+p exec "i3-nagbar -t warning -m 'You pressed the power off shortcut. Do you really want to power off this computer?' -b 'Yes, power off!' 'sudo /sbin/poweroff'"
+bindsym Mod1+Control+Delete exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot this computer?' -b 'Yes, reboot NOW!' 'sudo /sbin/reboot'"
+bindsym $mod+$cmod+l exec i3lock
 
 
 
 ##########################
-# Focus Control & Layout #
+# Focus control & Layout #
 ##########################
 
 
@@ -97,20 +121,20 @@ bindsym $mod+Right focus right
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+#bindsym $mod+z focus child
 
+bindsym Mod1+Tab mode "mark"
 mode "mark" {
-
-	bindsym 1	[con_mark="1"] focus ; mode "default"
-	bindsym 2	[con_mark="2"] focus ; mode "default"
-	bindsym 3	[con_mark="3"] focus ; mode "default"
-	bindsym 4	[con_mark="4"] focus ; mode "default"
-	bindsym 5	[con_mark="5"] focus ; mode "default"
-	bindsym 6	[con_mark="6"] focus ; mode "default"
-	bindsym 7	[con_mark="7"] focus ; mode "default"
-	bindsym 8	[con_mark="8"] focus ; mode "default"
-	bindsym 9	[con_mark="9"] focus ; mode "default"
-	bindsym 0	[con_mark="0"] focus ; mode "default"
+	bindsym 1 [con_mark="1"] focus ; mode "default"
+	bindsym 2 [con_mark="2"] focus ; mode "default"
+	bindsym 3 [con_mark="3"] focus ; mode "default"
+	bindsym 4 [con_mark="4"] focus ; mode "default"
+	bindsym 5 [con_mark="5"] focus ; mode "default"
+	bindsym 6 [con_mark="6"] focus ; mode "default"
+	bindsym 7 [con_mark="7"] focus ; mode "default"
+	bindsym 8 [con_mark="8"] focus ; mode "default"
+	bindsym 9 [con_mark="9"] focus ; mode "default"
+	bindsym 0 [con_mark="0"] focus ; mode "default"
 	bindsym a [con_mark="a"] focus ; mode "default"
 	bindsym b [con_mark="b"] focus ; mode "default"
 	bindsym c [con_mark="c"] focus ; mode "default"
@@ -138,18 +162,19 @@ mode "mark" {
 	bindsym y [con_mark="y"] focus ; mode "default"
 	bindsym z [con_mark="z"] focus ; mode "default"
 
+
 	bindsym space	exec i3-input -F '[con_mark="%s"] focus' -P 'Jump to a mark: ' ; mode "default"
 
-	bindsym Shift+1		mark "1" ; mode "default"
-	bindsym Shift+2		mark "2" ; mode "default"
-	bindsym Shift+3		mark "3" ; mode "default"
-	bindsym Shift+4		mark "4" ; mode "default"
-	bindsym Shift+5		mark "5" ; mode "default"
-	bindsym Shift+6		mark "6" ; mode "default"
-	bindsym Shift+7		mark "7" ; mode "default"
-	bindsym Shift+8		mark "8" ; mode "default"
-	bindsym Shift+9		mark "9" ; mode "default"
-	bindsym Shift+0		mark "0" ; mode "default"
+	bindsym Shift+1 mark "1" ; mode "default"
+	bindsym Shift+2 mark "2" ; mode "default"
+	bindsym Shift+3 mark "3" ; mode "default"
+	bindsym Shift+4 mark "4" ; mode "default"
+	bindsym Shift+5 mark "5" ; mode "default"
+	bindsym Shift+6 mark "6" ; mode "default"
+	bindsym Shift+7 mark "7" ; mode "default"
+	bindsym Shift+8	mark "8" ; mode "default"
+	bindsym Shift+9 mark "9" ; mode "default"
+	bindsym Shift+0 mark "0" ; mode "default"
 	bindsym Shift+a mark "a" ; mode "default"
 	bindsym Shift+b mark "b" ; mode "default"
 	bindsym Shift+c mark "c" ; mode "default"
@@ -180,26 +205,30 @@ mode "mark" {
 
 	bindsym Shift+space	exec i3-input -F 'mark "%s"' -P 'Enter a mark: ' ; mode "default"
 
-#bindsym Mod1+1		move container to mark 1  ; mode "default"
-#bindsym Mod1+1		move scratchpad; [con_mark="1"] focus ; scratchpad show ;  floating disable ; mode "default"
-	bindsym Mod4+1		exec ~/.i3/scripts/move.sh 1
-	bindsym Mod4+2		exec ~/.i3/scripts/move.sh 2
-	bindsym Mod4+3		exec ~/.i3/scripts/move.sh 3
-	bindsym Mod4+4		exec ~/.i3/scripts/move.sh 4
-	bindsym Mod4+5		exec ~/.i3/scripts/move.sh 5
-	bindsym Mod4+6		exec ~/.i3/scripts/move.sh 6
-	bindsym Mod4+7		exec ~/.i3/scripts/move.sh 7
-	bindsym Mod4+8		exec ~/.i3/scripts/move.sh 8
-	bindsym Mod4+9		exec ~/.i3/scripts/move.sh 9
-	bindsym Mod4+0		exec ~/.i3/scripts/move.sh 0
-	bindsym Mod4+w		exec ~/.i3/scripts/move.sh w
-	bindsym Mod4+e		exec ~/.i3/scripts/move.sh e
-	bindsym Mod4+f		exec ~/.i3/scripts/move.sh f
-	bindsym Mod4+t		exec ~/.i3/scripts/move.sh t
-	bindsym Mod4+c		exec ~/.i3/scripts/move.sh c
+#prototype rotating set... # _1 is the most recently visited.
+#likely to be useful for auto assigning to emails and terminals or other pop-up windows?
+#NB: --add doesn't work yet in my version, will be coming in future...
+	bindsym minus [con_mark="_3"] focus , unmark "_3" , mark --add "_0"; [con_mark="_2"] unmark "_2", mark --add "_3" ; [con_mark="_1"] unmark _1, mark --add "_2" ; [con_mark="_0"] unmark _0, mark --add "_1"
+	bindsym Shift+minus mark --add "_1" ;  mode "default"
 
-	bindsym Escape		mode "default"
-	bindsym Return		mode "default"
+	bindsym Mod4+1 exec ~/.i3/scripts/move.sh 1
+	bindsym Mod4+2 exec ~/.i3/scripts/move.sh 2
+	bindsym Mod4+3 exec ~/.i3/scripts/move.sh 3
+	bindsym Mod4+4 exec ~/.i3/scripts/move.sh 4
+	bindsym Mod4+5 exec ~/.i3/scripts/move.sh 5
+	bindsym Mod4+6 exec ~/.i3/scripts/move.sh 6
+	bindsym Mod4+7 exec ~/.i3/scripts/move.sh 7
+	bindsym Mod4+8 exec ~/.i3/scripts/move.sh 8
+	bindsym Mod4+9 exec ~/.i3/scripts/move.sh 9
+	bindsym Mod4+0 exec ~/.i3/scripts/move.sh 0
+	bindsym Mod4+w exec ~/.i3/scripts/move.sh w
+	bindsym Mod4+e exec ~/.i3/scripts/move.sh e
+	bindsym Mod4+f exec ~/.i3/scripts/move.sh f
+	bindsym Mod4+t exec ~/.i3/scripts/move.sh t
+	bindsym Mod4+c exec ~/.i3/scripts/move.sh c
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
 
 	bindsym Shift+h move left
 	bindsym Shift+j move down
@@ -211,10 +240,10 @@ mode "mark" {
 	bindsym Shift+Up move up
 	bindsym Shift+Right move right
 
-	bindsym h focus left
-	bindsym j focus down
-	bindsym k focus up
-	bindsym l focus right
+	#bindsym h focus left
+	#bindsym j focus down
+	#bindsym k focus up
+	#bindsym l focus right
 
 	bindsym Left focus left
 	bindsym Down focus down
@@ -222,8 +251,6 @@ mode "mark" {
 	bindsym Right focus right
 }
 
-bindsym Mod1+Tab mode "mark"
-bindsym Mod4+space mode "launch"
 
 
 # move window within layout
@@ -238,8 +265,9 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 
-#Layout:
-########
+##########
+# Layout #
+##########
 
 bindsym $mod+f fullscreen
 
@@ -305,72 +333,70 @@ set $wsn7 "7: accounts"
 set $wsn8 "8: cine"
 set $wsn9 "9: games"
 set $wsn0 "0: 3d"
-set $wsnf1 "f1: config"
-set $wsnf2 "f2: std"
-set $wsnf3 "f3: std"
-set $wsnf4 "f4: std"
-set $wsnf5 "f5: std"
-set $wsnf6 "f6: std"
-set $wsnf7 "f7: std"
-set $wsnf8 "f8: std"
-set $wsnf9 "f9: std"
-set $wsnf10 "f10: std"
-set $wsnf11 "f11: std"
-set $wsnf12 "f12: std"
+set $wsnf1 "11: f1: config"
+set $wsnf2 "12: f2: std"
+set $wsnf3 "13: f3: std"
+set $wsnf4 "14: f4: std"
+set $wsnf5 "15: f5: std"
+set $wsnf6 "16: f6: std"
+set $wsnf7 "17: f7: std"
+set $wsnf8 "18: f8: std"
+set $wsnf9 "19: f9: std"
+set $wsnf10 "20: f10: std"
+set $wsnf11 "21: f11: std"
+set $wsnf12 "22: f12: std"
 
 # switch to workspace
-bindsym $mod+1 workspace $wsn1
-bindsym $mod+2 workspace $wsn2
-bindsym $mod+3 workspace $wsn3
-bindsym $mod+4 workspace $wsn4
-bindsym $mod+5 workspace $wsn5
-bindsym $mod+6 workspace $wsn6
-bindsym $mod+7 workspace $wsn7
-bindsym $mod+8 workspace $wsn8
-bindsym $mod+9 workspace $wsn9
-bindsym $mod+0 workspace $wsn0
-bindsym $mod+F1 workspace $wsnf1
-bindsym $mod+F2 workspace $wsnf2
-bindsym $mod+F3 workspace $wsnf3
-bindsym $mod+F4 workspace $wsnf4
-bindsym $mod+F5 workspace $wsnf5
-bindsym $mod+F6 workspace $wsnf6
-bindsym $mod+F7 workspace $wsnf7
-bindsym $mod+F8 workspace $wsnf8
-bindsym $mod+F9 workspace $wsnf9
-bindsym $mod+F10 workspace $wsnf10
-bindsym $mod+F11 workspace $wsnf11
-bindsym $mod+F12 workspace $wsnf12
+bindsym $mod+1 workspace number $wsn1
+bindsym $mod+2 workspace number $wsn2
+bindsym $mod+3 workspace number $wsn3
+bindsym $mod+4 workspace number $wsn4
+bindsym $mod+5 workspace number $wsn5
+bindsym $mod+6 workspace number $wsn6
+bindsym $mod+7 workspace number $wsn7
+bindsym $mod+8 workspace number $wsn8
+bindsym $mod+9 workspace number $wsn9
+bindsym $mod+0 workspace number $wsn0
+bindsym $mod+F1 workspace number $wsnf1
+bindsym $mod+F2 workspace number $wsnf2
+bindsym $mod+F3 workspace number $wsnf3
+bindsym $mod+F4 workspace number $wsnf4
+bindsym $mod+F5 workspace number $wsnf5
+bindsym $mod+F6 workspace number $wsnf6
+bindsym $mod+F7 workspace number $wsnf7
+bindsym $mod+F8 workspace number $wsnf8
+bindsym $mod+F9 workspace number $wsnf9
+bindsym $mod+F10 workspace number $wsnf10
+bindsym $mod+F11 workspace number $wsnf11
+bindsym $mod+F12 workspace number $wsnf12
+
+# move focused container to workspace
+bindsym $mod+shift+F1 move container to workspace number $wsnf1
+bindsym $mod+shift+F2 move container to workspace number $wsnf2
+bindsym $mod+shift+F3 move container to workspace number $wsnf3
+bindsym $mod+shift+F4 move container to workspace number $wsnf4
+bindsym $mod+shift+F5 move container to workspace number $wsnf5
+bindsym $mod+shift+F6 move container to workspace number $wsnf6
+bindsym $mod+shift+F7 move container to workspace number $wsnf7
+bindsym $mod+shift+F8 move container to workspace number $wsnf8
+bindsym $mod+shift+F9 move container to workspace number $wsnf9
+bindsym $mod+shift+F10 move container to workspace number $wsnf10
+bindsym $mod+shift+F11 move container to workspace number $wsnf11
+bindsym $mod+shift+F12 move container to workspace number $wsnf12
+bindsym $mod+shift+1 move container to workspace number $wsn1
+bindsym $mod+shift+2 move container to workspace number $wsn2
+bindsym $mod+shift+3 move container to workspace number $wsn3
+bindsym $mod+shift+4 move container to workspace number $wsn4
+bindsym $mod+shift+5 move container to workspace number $wsn5
+bindsym $mod+shift+6 move container to workspace number $wsn6
+bindsym $mod+shift+7 move container to workspace number $wsn7
+bindsym $mod+shift+8 move container to workspace number $wsn8
+bindsym $mod+shift+9 move container to workspace number $wsn9
+bindsym $mod+shift+0 move container to workspace number $wsn0
+
 bindsym $mod+minus focus output left
 bindsym $mod+plus focus output right
 bindsym $mod+shift+minus move workspace to output left
 bindsym $mod+shift+plus move workspace to output right
 
-# move focused container to workspace
-bindsym $mod+shift+F1 move container to workspace $wsnf1
-bindsym $mod+shift+F2 move container to workspace $wsnf2
-bindsym $mod+shift+F3 move container to workspace $wsnf3
-bindsym $mod+shift+F4 move container to workspace $wsnf4
-bindsym $mod+shift+F5 move container to workspace $wsnf5
-bindsym $mod+shift+F6 move container to workspace $wsnf6
-bindsym $mod+shift+F7 move container to workspace $wsnf7
-bindsym $mod+shift+F8 move container to workspace $wsnf8
-bindsym $mod+shift+F9 move container to workspace $wsnf9
-bindsym $mod+shift+F10 move container to workspace $wsnf10
-bindsym $mod+shift+F11 move container to workspace $wsnf11
-bindsym $mod+shift+F12 move container to workspace $wsnf12
-bindsym $mod+shift+1 move container to workspace $wsn1
-bindsym $mod+shift+2 move container to workspace $wsn2
-bindsym $mod+shift+3 move container to workspace $wsn3
-bindsym $mod+shift+4 move container to workspace $wsn4
-bindsym $mod+shift+5 move container to workspace $wsn5
-bindsym $mod+shift+6 move container to workspace $wsn6
-bindsym $mod+shift+7 move container to workspace $wsn7
-bindsym $mod+shift+8 move container to workspace $wsn8
-bindsym $mod+shift+9 move container to workspace $wsn9
-bindsym $mod+shift+0 move container to workspace $wsn0
-
-
-#rename workspace??
-#re-bindsym \$mod${id} workspace ${name}; byindsym \$mod${id} move container to workspace ${name} ;
-#move all containers from old to new?
+bindsym $mod+$cmod+space exec i3-input -F 'rename workspace to "%s"' -P "Enter new workspace name: "
