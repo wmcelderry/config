@@ -31,6 +31,7 @@ set $PRESENT libreoffice --impress
 set $mod Mod4 
 focus_follows_mouse no
 font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+force_xinerama yes
 
 #show_marks yes
 
