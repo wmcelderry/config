@@ -23,9 +23,9 @@ mode "launch" {
 
 # web browser
 	bindsym w exec iceweasel ; mode "default"
-	bindsym c exec gnome-calculator ; mode "default"
-	bindsym p exec linphone ; mode "default"
 	bindsym e exec icedove ; mode "default"
+	bindsym c exec rxvt -e bc ; mode "default"
+	bindsym p exec linphone ; mode "default"
 	bindsym x exec i3-sensible-terminal -e vim ; mode "default"
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
@@ -52,9 +52,10 @@ bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1
 ############################
 # Config for starting apps #
 ############################
-#for_window [title=" "] move container to workspace 1
 for_window [instance="Mail" class="Thunderbird"] mark "e"
+for_window [instance="Mail" class="Icedove"] mark "e"
 for_window [instance="Navigator" class="Firefox"] mark "w"
+for_window [instance="Navigator" class="Iceweasel"] mark "w" #Still uses firefox at time of writing... xprop | grep WM_CLASS
 for_window [instance="linphone" class="Linphone"] mark "p"
 
 
@@ -371,3 +372,8 @@ bindsym $mod+shift+7 move container to workspace $wsn7
 bindsym $mod+shift+8 move container to workspace $wsn8
 bindsym $mod+shift+9 move container to workspace $wsn9
 bindsym $mod+shift+0 move container to workspace $wsn0
+
+
+#rename workspace??
+#re-bindsym \$mod${id} workspace ${name}; byindsym \$mod${id} move container to workspace ${name} ;
+#move all containers from old to new?
