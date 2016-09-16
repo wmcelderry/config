@@ -415,3 +415,12 @@ bindsym $mod+shift+minus move workspace to output left
 bindsym $mod+shift+plus move workspace to output right
 
 bindsym $mod+$cmod+space exec i3-input -F 'rename workspace to "%s"' -P "Enter new workspace name: "
+
+
+#Ensure there is a way of sending raw key presses by getting all binding out of the way:
+#hard to get in to by accident, and toggles out...
+
+bindsym $mod+Control+Shift+Escape mode disableKeys
+mode disableKeys {
+	bindsym $mod+Control+Shift+Escape mode default
+}
