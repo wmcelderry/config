@@ -19,7 +19,7 @@ set $TERM rxvt
 set $CALC rxvt -e bc
 set $TEXT rxvt -e vim
 
-set $WORD libreoffice --writer
+set $WORDPROC libreoffice --writer
 set $SSHEET libreoffice --calc
 set $PRESENT libreoffice --impress
 
@@ -57,7 +57,7 @@ mode "launch" {
 	bindsym p exec $PHONE ; mode "default"
 	bindsym t exec $TEXT ; mode "default"
 
-	bindsym w exec $WORD ; mode "default"
+	bindsym Shift+w exec $WORDPROC ; mode "default"
 	bindsym s exec $SSHEET ; mode "default"
 	bindsym i exec $PRESENT ; mode "default"
 
@@ -162,72 +162,90 @@ mode "mark" {
 	bindsym x [con_mark="x"] focus ; mode "default"
 	bindsym y [con_mark="y"] focus ; mode "default"
 	bindsym z [con_mark="z"] focus ; mode "default"
-
-
 	bindsym space	exec i3-input -F '[con_mark="%s"] focus' -P 'Jump to a mark: ' ; mode "default"
 
-	bindsym Shift+1 mark "1" ; mode "default"
-	bindsym Shift+2 mark "2" ; mode "default"
-	bindsym Shift+3 mark "3" ; mode "default"
-	bindsym Shift+4 mark "4" ; mode "default"
-	bindsym Shift+5 mark "5" ; mode "default"
-	bindsym Shift+6 mark "6" ; mode "default"
-	bindsym Shift+7 mark "7" ; mode "default"
-	bindsym Shift+8	mark "8" ; mode "default"
-	bindsym Shift+9 mark "9" ; mode "default"
-	bindsym Shift+0 mark "0" ; mode "default"
-	bindsym Shift+a mark "a" ; mode "default"
-	bindsym Shift+b mark "b" ; mode "default"
-	bindsym Shift+c mark "c" ; mode "default"
-	bindsym Shift+d mark "d" ; mode "default"
-	bindsym Shift+e mark "e" ; mode "default"
-	bindsym Shift+f mark "f" ; mode "default"
-	bindsym Shift+g mark "g" ; mode "default"
-	bindsym Shift+h mark "h" ; mode "default"
-	bindsym Shift+i mark "i" ; mode "default"
-	bindsym Shift+j mark "j" ; mode "default"
-	bindsym Shift+k mark "k" ; mode "default"
-	bindsym Shift+l mark "l" ; mode "default"
-	bindsym Shift+m mark "m" ; mode "default"
-	bindsym Shift+n mark "n" ; mode "default"
-	bindsym Shift+o mark "o" ; mode "default"
-	bindsym Shift+p mark "p" ; mode "default"
-	bindsym Shift+q mark "q" ; mode "default"
-	bindsym Shift+r mark "r" ; mode "default"
-	bindsym Shift+s mark "s" ; mode "default"
-	bindsym Shift+t mark "t" ; mode "default"
-	bindsym Shift+u mark "u" ; mode "default"
-	bindsym Shift+v mark "v" ; mode "default"
-	bindsym Shift+w mark "w" ; mode "default"
-	bindsym Shift+x mark "x" ; mode "default"
-	bindsym Shift+y mark "y" ; mode "default"
-	bindsym Shift+z mark "z" ; mode "default"
+	bindsym Shift+1 [ con_mark="1"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+2 [ con_mark="2"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+3 [ con_mark="3"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+4 [ con_mark="4"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+5 [ con_mark="5"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+6 [ con_mark="6"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+7 [ con_mark="7"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+8	[ con_mark="8"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+9 [ con_mark="9"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+0 [ con_mark="0"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+a [ con_mark="a"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+b [ con_mark="b"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+c [ con_mark="c"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+d [ con_mark="d"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+e [ con_mark="e"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+f [ con_mark="f"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+g [ con_mark="g"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+h [ con_mark="h"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+i [ con_mark="i"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+j [ con_mark="j"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+k [ con_mark="k"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+l [ con_mark="l"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+m [ con_mark="m"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+n [ con_mark="n"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+o [ con_mark="o"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+p [ con_mark="p"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+q [ con_mark="q"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+r [ con_mark="r"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+s [ con_mark="s"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+t [ con_mark="t"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+u [ con_mark="u"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+v [ con_mark="v"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+w [ con_mark="w"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+x [ con_mark="x"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+y [ con_mark="y"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+space	exec i3-input -F '[con_mark="%s"] move scratchpad, scratchpad show, floating toggle' -P 'Pull mark: ' ; mode "default"
 
-
-	bindsym Shift+space	exec i3-input -F 'mark "%s"' -P 'Enter a mark: ' ; mode "default"
+	bindsym Control+1 mark "1" ; mode "default"
+	bindsym Control+2 mark "2" ; mode "default"
+	bindsym Control+3 mark "3" ; mode "default"
+	bindsym Control+4 mark "4" ; mode "default"
+	bindsym Control+5 mark "5" ; mode "default"
+	bindsym Control+6 mark "6" ; mode "default"
+	bindsym Control+7 mark "7" ; mode "default"
+	bindsym Control+8 mark "8" ; mode "default"
+	bindsym Control+9 mark "9" ; mode "default"
+	bindsym Control+0 mark "0" ; mode "default"
+	bindsym Control+a mark "a" ; mode "default"
+	bindsym Control+b mark "b" ; mode "default"
+	bindsym Control+c mark "c" ; mode "default"
+	bindsym Control+d mark "d" ; mode "default"
+	bindsym Control+e mark "e" ; mode "default"
+	bindsym Control+f mark "f" ; mode "default"
+	bindsym Control+g mark "g" ; mode "default"
+	bindsym Control+h mark "h" ; mode "default"
+	bindsym Control+i mark "i" ; mode "default"
+	bindsym Control+j mark "j" ; mode "default"
+	bindsym Control+k mark "k" ; mode "default"
+	bindsym Control+l mark "l" ; mode "default"
+	bindsym Control+m mark "m" ; mode "default"
+	bindsym Control+n mark "n" ; mode "default"
+	bindsym Control+o mark "o" ; mode "default"
+	bindsym Control+p mark "p" ; mode "default"
+	bindsym Control+q mark "q" ; mode "default"
+	bindsym Control+r mark "r" ; mode "default"
+	bindsym Control+s mark "s" ; mode "default"
+	bindsym Control+t mark "t" ; mode "default"
+	bindsym Control+u mark "u" ; mode "default"
+	bindsym Control+v mark "v" ; mode "default"
+	bindsym Control+w mark "w" ; mode "default"
+	bindsym Control+x mark "x" ; mode "default"
+	bindsym Control+y mark "y" ; mode "default"
+	bindsym Control+z mark "z" ; mode "default"
+	bindsym Control+space	exec i3-input -F 'mark "%s"' -P 'Assign a mark: ' ; mode "default"
 
 #prototype rotating set... # _1 is the most recently visited.
 #likely to be useful for auto assigning to emails and terminals or other pop-up windows?
 #NB: --add doesn't work yet in my version, will be coming in future...
 	bindsym minus [con_mark="_3"] focus , unmark "_3" , mark --add "_0"; [con_mark="_2"] unmark "_2", mark --add "_3" ; [con_mark="_1"] unmark _1, mark --add "_2" ; [con_mark="_0"] unmark _0, mark --add "_1"
-	bindsym Shift+minus mark --add "_1" ;  mode "default"
-
-	bindsym Mod4+1 exec ~/.i3/scripts/move.sh 1
-	bindsym Mod4+2 exec ~/.i3/scripts/move.sh 2
-	bindsym Mod4+3 exec ~/.i3/scripts/move.sh 3
-	bindsym Mod4+4 exec ~/.i3/scripts/move.sh 4
-	bindsym Mod4+5 exec ~/.i3/scripts/move.sh 5
-	bindsym Mod4+6 exec ~/.i3/scripts/move.sh 6
-	bindsym Mod4+7 exec ~/.i3/scripts/move.sh 7
-	bindsym Mod4+8 exec ~/.i3/scripts/move.sh 8
-	bindsym Mod4+9 exec ~/.i3/scripts/move.sh 9
-	bindsym Mod4+0 exec ~/.i3/scripts/move.sh 0
-	bindsym Mod4+w exec ~/.i3/scripts/move.sh w
-	bindsym Mod4+e exec ~/.i3/scripts/move.sh e
-	bindsym Mod4+f exec ~/.i3/scripts/move.sh f
-	bindsym Mod4+t exec ~/.i3/scripts/move.sh t
-	bindsym Mod4+c exec ~/.i3/scripts/move.sh c
-
+	bindsym Shift+minus [con_mark="_3"] move scratchpad, scratchpad show, floating toggle , unmark "_3" , mark --add "_0"; [con_mark="_2"] unmark "_2", mark --add "_3" ; [con_mark="_1"] unmark _1, mark --add "_2" ; [con_mark="_0"] unmark _0, mark --add "_1";  mode "default"
+	bindsym Control+minus mark --add "_1" ;  mode "default"
+ 
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
 
@@ -241,6 +259,7 @@ mode "mark" {
 	bindsym Shift+Up move up
 	bindsym Shift+Right move right
 
+	#now assigned to tags.
 	#bindsym h focus left
 	#bindsym j focus down
 	#bindsym k focus up
@@ -272,14 +291,9 @@ bindsym $mod+Shift+Right move right
 
 bindsym $mod+f fullscreen
 
-#floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
-#bindsym $mod+space focus mode_toggle
 
-# split in horizontal orientation
 bindsym $mod+b split h
-
-# split in vertical orientation
 bindsym $mod+v split v
 
 
