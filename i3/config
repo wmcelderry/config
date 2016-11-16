@@ -5,19 +5,19 @@
 # System setup #
 ################
 
-set $BROWSER iceweasel
+set $BROWSER firefox
 set $BROWSER_WINCLASS Firefox
 
-set $EMAIL icedove
-set $EMAIL_WINCLASS Icedove
+set $EMAIL thunderbird
+set $EMAIL_WINCLASS Thunderbird
 
 set $PHONE linphone
 set $PHONE_WINCLASS Linphone
 
-set $TERM rxvt
+set $TERM i3-sensible-terminal
 
-set $CALC rxvt -e bc
-set $TEXT rxvt -e vim
+set $CALC i3-sensible-terminal -e bc
+set $TEXT i3-sensible-terminal -e vim
 
 set $WORDPROC libreoffice --writer
 set $SSHEET libreoffice --calc
