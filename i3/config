@@ -64,8 +64,8 @@ mode "launch" {
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
 	bindsym Shift+d exec dmenu_run
-	bindsym d exec --no-startup-id i3-dmenu-desktop
-	bindsym Space exec --no-startup-id i3-dmenu-desktop
+	bindsym d exec --no-startup-id i3-dmenu-desktop; mode "default"
+	bindsym Space exec --no-startup-id i3-dmenu-desktop; mode "default"
 
 	bindsym Escape mode default
 	bindsym Return mode default
