@@ -24,6 +24,10 @@ set $TEXT rxvt -e vim
 set $WORDPROC libreoffice --writer
 set $SSHEET libreoffice --calc
 set $PRESENT libreoffice --impress
+set $SVG inkscape
+
+set $MONITOR_UPDATE /etc/udev/scripts/screen_hotplug.sh
+set $MONITOR_OFF /home/will/scripts/screen_off.sh
 
 
 ##################
@@ -60,8 +64,11 @@ mode "launch" {
 
 
 	bindsym Shift+w exec $WORDPROC ; mode "default"
-	bindsym s exec $SSHEET ; mode "default"
-	bindsym i exec $PRESENT ; mode "default"
+	bindsym Shift+s exec $SSHEET ; mode "default"
+	bindsym Shift+i exec $PRESENT ; mode "default"
+	bindsym i exec $svg ; mode "default"
+	bindsym Control+m exec $MONITOR_UPDATE ; mode "default"
+	bindsym Control+o exec $MONITOR_OFF ; mode "default"
 
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
@@ -103,9 +110,10 @@ bindsym $mod+$cmod+q kill
 
 bindsym $mod+$cmod+r restart
 bindsym $mod+$cmod+c reload
+bindsym $mod+$cmod+e exit
 bindsym $mod+$cmod+p exec "i3-nagbar -t warning -m 'You pressed the power off shortcut. Do you really want to power off this computer?' -b 'Yes, power off!' 'sudo /sbin/poweroff'"
 bindsym Mod1+Control+Delete exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot this computer?' -b 'Yes, reboot NOW!' 'sudo /sbin/reboot'"
-bindsym $mod+$cmod+l exec i3lock
+bindsym $mod+$cmod+l exec i3lock -c 111111
 
 
 
