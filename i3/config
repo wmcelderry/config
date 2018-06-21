@@ -70,6 +70,12 @@ mode "monitor" {
 	bindsym Return mode default
 }
 
+bindsym $mod+c mode "config"
+mode "config" {
+	bindsym w exec $TERM -e /usr/bin/sudo vim /etc/wpa_supplicant/wpa_supplicant.conf; mode "default"
+	bindsym i exec $TERM -e /usr/bin/vim /home/will/config/i3/config; mode "default"
+}
+
 bindsym $mod+space mode "launch"
 mode "launch" {
 
