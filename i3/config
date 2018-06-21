@@ -21,13 +21,14 @@ set $PDF zathura
 set $CALC rxvt -e bc
 set $TEXT rxvt -e vim
 
-set $WORDPROC libreoffice --writer
-set $SSHEET libreoffice --calc
-set $PRESENT libreoffice --impress
+set $WORDPROC QT_QPA_PLATFORMTHEME= libreoffice --writer
+set $SSHEET QT_QPA_PLATFORMTHEME= libreoffice --calc
+set $PRESENT QT_QPA_PLATFORMTHEME= libreoffice --impress
 set $SVG inkscape
 
 set $MONITOR_UPDATE /etc/udev/scripts/screen_hotplug.sh
 set $MONITOR_OFF /home/will/scripts/screen_off.sh
+set $BRIGHTNESS /home/will/scripts/brightness.sh
 
 
 ##################
@@ -52,7 +53,24 @@ bar {
 # terminal
 bindsym $mod+Return exec $TERM
 
-bindsym Mod4+space mode "launch"
+bindsym $mod+m mode "monitor"
+mode "monitor" {
+	bindsym Control+u exec /home/will/usbMonitors.sh 1 ; mode "default"
+	bindsym Control+m exec $MONITOR_UPDATE ; mode "default"
+	bindsym Control+o exec $MONITOR_OFF ; mode "default"
+	bindsym 9 exec $BRIGHTNESS 976 ; mode "default"
+	bindsym 7 exec $BRIGHTNESS 500 ; mode "default"
+	bindsym 5 exec $BRIGHTNESS 200 ; mode "default"
+	bindsym 3 exec $BRIGHTNESS 100 ; mode "default"
+	bindsym 2 exec $BRIGHTNESS 50 ; mode "default"
+	bindsym 1 exec $BRIGHTNESS 20 ; mode "default"
+	bindsym 0 exec $BRIGHTNESS 1 ; mode "default"
+
+	bindsym Escape mode default
+	bindsym Return mode default
+}
+
+bindsym $mod+space mode "launch"
 mode "launch" {
 
 	bindsym w exec $BROWSER ; mode "default"
@@ -61,14 +79,14 @@ mode "launch" {
 	bindsym p exec $PHONE ; mode "default"
 	bindsym t exec $TEXT ; mode "default"
 	bindsym f exec $PDF ; mode "default"
+	bindsym $mod+Return exec $TERM ; mode "default"
+	bindsym Return exec $TERM ; mode "default"
 
 
 	bindsym Shift+w exec $WORDPROC ; mode "default"
 	bindsym Shift+s exec $SSHEET ; mode "default"
 	bindsym Shift+i exec $PRESENT ; mode "default"
 	bindsym i exec $svg ; mode "default"
-	bindsym Control+m exec $MONITOR_UPDATE ; mode "default"
-	bindsym Control+o exec $MONITOR_OFF ; mode "default"
 
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
@@ -138,7 +156,7 @@ bindsym $mod+Right focus right
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+z focus child
+bindsym $mod+z focus child
 
 bindsym Mod1+Tab mode "mark"
 mode "mark" {
@@ -360,13 +378,13 @@ bindsym $mod+r mode "resize"
 
 set $wsn1 "1: 'net"
 set $wsn2 "2: work"
-set $wsn3 "3: MS"
-set $wsn4 "4: todo"
-set $wsn5 "5: heating"
+set $wsn3 "3: todo"
+set $wsn4 "4: "
+set $wsn5 "5: "
 set $wsn6 "6: networking"
 set $wsn7 "7: accounts"
-set $wsn8 "8: cine"
-set $wsn9 "9: games"
+set $wsn8 "8: "
+set $wsn9 "9: "
 set $wsn0 "0: 3d"
 set $wsnf1 "11: f1: config"
 set $wsnf2 "12: f2: std"
@@ -431,8 +449,10 @@ bindsym $mod+shift+0 move container to workspace number $wsn0
 
 bindsym $mod+minus focus output left
 bindsym $mod+plus focus output right
-bindsym $mod+shift+minus move workspace to output left
-bindsym $mod+shift+plus move workspace to output right
+bindsym $mod+shift+minus move container to output left
+bindsym $mod+shift+plus move container to output right
+bindsym $mod+Control+minus move workspace to output left
+bindsym $mod+Control+equal move workspace to output right
 
 bindsym $mod+$cmod+space exec i3-input -F 'rename workspace to "%s"' -P "Enter new workspace name: "
 
