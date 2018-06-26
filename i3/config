@@ -16,7 +16,7 @@ set $PHONE_WINCLASS Linphone
 
 set $PDF zathura
 
-set $TERM i3-sensible-terminal
+set $TERM urxvt
 
 set $CALC i3-sensible-terminal -e bc
 set $TEXT i3-sensible-terminal -e vim
