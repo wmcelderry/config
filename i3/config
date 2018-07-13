@@ -55,7 +55,7 @@ bindsym $mod+Return exec $TERM
 
 bindsym $mod+m mode "monitor"
 mode "monitor" {
-	bindsym Control+u exec /home/will/usbMonitors.sh 1 ; mode "default"
+	bindsym Control+u exec /home/will/scripts/usbMonitors.sh 1 ; mode "default"
 	bindsym Control+m exec $MONITOR_UPDATE ; mode "default"
 	bindsym Control+o exec $MONITOR_OFF ; mode "default"
 	bindsym 9 exec $BRIGHTNESS 976 ; mode "default"
@@ -72,7 +72,9 @@ mode "monitor" {
 
 bindsym $mod+c mode "config"
 mode "config" {
+	bindsym r reload
 	bindsym w exec $TERM -e /usr/bin/sudo vim /etc/wpa_supplicant/wpa_supplicant.conf; mode "default"
+	bindsym s exec $TERM -e /usr/bin/vim /home/will/scripts/setup.sh; mode "default"
 	bindsym i exec $TERM -e /usr/bin/vim /home/will/config/i3/config; mode "default"
 }
 
@@ -91,7 +93,7 @@ mode "launch" {
 
 	bindsym Shift+w exec $WORDPROC ; mode "default"
 	bindsym Shift+s exec $SSHEET ; mode "default"
-	bindsym Shift+i exec $PRESENT ; mode "default"
+	bindsym Shift+p exec $PRESENT ; mode "default"
 	bindsym i exec $svg ; mode "default"
 
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
@@ -242,6 +244,7 @@ mode "mark" {
 	bindsym Shift+w [ con_mark="w"] move scratchpad, scratchpad show, floating toggle ; mode "default"
 	bindsym Shift+x [ con_mark="x"] move scratchpad, scratchpad show, floating toggle ; mode "default"
 	bindsym Shift+y [ con_mark="y"] move scratchpad, scratchpad show, floating toggle ; mode "default"
+	bindsym Shift+z [ con_mark="z"] move scratchpad, scratchpad show, floating toggle ; mode "default"
 	bindsym Shift+space	exec i3-input -F '[con_mark="%s"] move scratchpad, scratchpad show, floating toggle' -P 'Pull mark: ' ; mode "default"
 
 #Assign marks = Control + key
