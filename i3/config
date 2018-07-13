@@ -538,3 +538,6 @@ bindsym $mod+Control+Shift+Escape mode disableKeys
 mode disableKeys {
 	bindsym $mod+Control+Shift+Escape mode default
 }
+
+
+exec /home/will/scripts/log_batt.sh
