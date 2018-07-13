@@ -22,8 +22,14 @@ function listSW()
 		zathura
 		asunder
 		wodim
+		inkscape
 		EOF
 }
+
+function addPPAs()
+{
+}
+
 
 function installSW()
 {
