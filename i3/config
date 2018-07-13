@@ -43,7 +43,7 @@ font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 #show_marks yes
 
 bar {
-        status_command i3status
+        status_command i3status --config ~/.i3status.conf
 }
 
 
@@ -542,3 +542,4 @@ mode disableKeys {
 
 #autostart:
 exec xinput set-int-prop "DELL07E6:00 06CB:76AF Touchpad" 276 8 1
+exec /home/will/scripts/log_batt.sh
