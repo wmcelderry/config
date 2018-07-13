@@ -24,6 +24,7 @@ set $TEXT rxvt -e vim
 set $WORDPROC QT_QPA_PLATFORMTHEME= libreoffice --writer
 set $SSHEET QT_QPA_PLATFORMTHEME= libreoffice --calc
 set $PRESENT QT_QPA_PLATFORMTHEME= libreoffice --impress
+
 set $SVG inkscape
 
 set $MONITOR_UPDATE /etc/udev/scripts/screen_hotplug.sh
@@ -50,9 +51,8 @@ bar {
 # Launching Apps #
 ##################
 
-# terminal
-bindsym $mod+Return exec $TERM
 
+#make it easy to change the monitor
 bindsym $mod+m mode "monitor"
 mode "monitor" {
 	bindsym Control+u exec /home/will/scripts/usbMonitors.sh 1 ; mode "default"
@@ -70,13 +70,60 @@ mode "monitor" {
 	bindsym Return mode default
 }
 
+
+#make it easy to change the sound settings:
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
+bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
+
+bindsym $mod+s mode "sound"
+mode "sound" {
+	bindsym m exec amixer -q -D pulse set Master toggle; mode "default"
+	bindsym equal exec amixer -q set Master 2dB+ unmute
+	bindsym minus exec amixer -q set Master 2dB- unmute
+
+	bindsym 0 exec amixer -q set Master -M 100% ; mode "default"
+	bindsym 9 exec amixer -q set Master -M 90% ; mode "default"
+	bindsym 8 exec amixer -q set Master -M 80% ; mode "default"
+	bindsym 7 exec amixer -q set Master -M 70% ; mode "default"
+	bindsym 6 exec amixer -q set Master -M 60% ; mode "default"
+	bindsym 5 exec amixer -q set Master -M 50% ; mode "default"
+	bindsym 4 exec amixer -q set Master -M 40% ; mode "default"
+	bindsym 3 exec amixer -q set Master -M 30% ; mode "default"
+	bindsym 2 exec amixer -q set Master -M 20% ; mode "default"
+	bindsym 1 exec amixer -q set Master -M 10% ; mode "default"
+
+# to add: moving sound between alsa cards.
+
+	bindsym Escape mode default
+	bindsym Return mode default
+}
+
+
+#make it easy to change config files
 bindsym $mod+c mode "config"
 mode "config" {
 	bindsym r reload
 	bindsym w exec $TERM -e /usr/bin/sudo vim /etc/wpa_supplicant/wpa_supplicant.conf; mode "default"
 	bindsym s exec $TERM -e /usr/bin/vim /home/will/scripts/setup.sh; mode "default"
 	bindsym i exec $TERM -e /usr/bin/vim /home/will/config/i3/config; mode "default"
+
+	bindsym Escape mode default
+	bindsym Return mode default
 }
+
+#make it easy to reconfigure network in common ways:
+bindsym $mod+n mode "net"
+mode "net" {
+	bindsym n exec $TERM -e /home/will/scripts/renewIP.sh ; mode "default"
+
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+#make it easy to launch common applications
+# easiest of all: terminal
+bindsym $mod+Return exec $TERM
 
 bindsym $mod+space mode "launch"
 mode "launch" {
@@ -106,22 +153,40 @@ mode "launch" {
 	bindsym Return mode default
 }
 
+#make it easy to get to quick access configurations & documents
+bindsym $mod+q mode "quick"
+mode "quick" {
+
+	bindsym t exec $TERM  -e /usr/bin/vim /home/will/todo; mode "default"
+	bindsym l exec $TERM  -e /usr/bin/vim /home/will/pigs/labbook/$(date +%Y%m%d.txt); mode "default"
+	bindsym w exec $TERM  -e /home/will/scripts/work_setup.sh; mode "default"
+
+	bindsym Escape mode default
+	bindsym Return mode default
+}
+
 
 #capture a screen shot
-bindsym Print exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+# xrandr | grep \\\<connected | awk '{geo=($3=="primary" ? $4 : $3) ; print $1 ": " geo}'
 
-#sound:
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
-bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
+bindsym Print mode "print screen"
+mode "print screen"
+{
+	bindsym 1 exec /home/will/scripts/XCapture.sh "LVDS-1"; mode default
+	bindsym 2 exec /home/will/scripts/XCapture.sh "DVI-I-1-1"; mode default
+	bindsym 3 exec /home/will/scripts/XCapture.sh "DVI-I-2-2"; mode default
+	bindsym Escape mode default
+	bindsym Return mode default
+}
+#exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
+bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
 
 
 #################################
 # Auto config for starting apps #
 #################################
-for_window [instance="Mail" class="${EMAIL_WINCLASS}"] mark "e"
+for_window [instance="Mail" class="$EMAIL_WINCLASS"] mark "e"
 for_window [instance="Navigator" class="$BROWSER_WINCLASS"] mark "w"
 for_window [instance="linphone" class="$PHONE_WINCLASS"] mark "p"
 
@@ -345,7 +410,7 @@ bindsym $mod+v split v
 
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -391,7 +456,7 @@ set $wsn3 "3: todo"
 set $wsn4 "4: "
 set $wsn5 "5: "
 set $wsn6 "6: networking"
-set $wsn7 "7: accounts"
+set $wsn7 "7: "
 set $wsn8 "8: "
 set $wsn9 "9: "
 set $wsn0 "0: 3d"
@@ -458,8 +523,8 @@ bindsym $mod+shift+0 move container to workspace number $wsn0
 
 bindsym $mod+minus focus output left
 bindsym $mod+plus focus output right
-bindsym $mod+shift+minus move container to output left
-bindsym $mod+shift+plus move container to output right
+bindsym $mod+shift+minus move container to output left; focus output left
+bindsym $mod+shift+plus move container to output right; focus output right
 bindsym $mod+Control+minus move workspace to output left
 bindsym $mod+Control+equal move workspace to output right
 
