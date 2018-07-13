@@ -41,4 +41,4 @@ URxvt.color13:    #fba1fb
 URxvt.color14:    #d7d9fc
 URxvt.color15:    #e2e2e2
 
-URxvt*scrollBar: valse
+URxvt*scrollBar: false
