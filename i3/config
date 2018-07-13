@@ -473,3 +473,7 @@ bindsym $mod+Control+Shift+Escape mode disableKeys
 mode disableKeys {
 	bindsym $mod+Control+Shift+Escape mode default
 }
+
+
+#autostart:
+exec xinput set-int-prop "DELL07E6:00 06CB:76AF Touchpad" 276 8 1
