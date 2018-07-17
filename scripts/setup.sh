@@ -24,6 +24,7 @@ function listSW()
 		wodim
 		inkscape
 		gnuplot
+		whois
 		EOF
 }
 
