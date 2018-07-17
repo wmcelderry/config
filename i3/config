@@ -26,6 +26,7 @@ set $SSHEET QT_QPA_PLATFORMTHEME= libreoffice --calc
 set $PRESENT QT_QPA_PLATFORMTHEME= libreoffice --impress
 
 set $SVG inkscape
+set $PCB kicad
 
 set $MONITOR_UPDATE /etc/udev/scripts/screen_hotplug.sh
 set $MONITOR_OFF /home/will/scripts/screen_off.sh
@@ -134,6 +135,7 @@ mode "launch" {
 	bindsym p exec $PHONE ; mode "default"
 	bindsym t exec $TEXT ; mode "default"
 	bindsym f exec $PDF ; mode "default"
+	bindsym k exec $PCB ; mode "default"
 	bindsym $mod+Return exec $TERM ; mode "default"
 	bindsym Return exec $TERM ; mode "default"
 
