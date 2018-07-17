@@ -174,7 +174,7 @@ mode "quick" {
 bindsym Print mode "print screen"
 mode "print screen"
 {
-	bindsym 1 exec /home/will/scripts/XCapture.sh "LVDS-1"; mode default
+	bindsym 1 exec /home/will/scripts/XCapture.sh "eDP-1"; mode default
 	bindsym 2 exec /home/will/scripts/XCapture.sh "DVI-I-1-1"; mode default
 	bindsym 3 exec /home/will/scripts/XCapture.sh "DVI-I-2-2"; mode default
 	bindsym Escape mode default
