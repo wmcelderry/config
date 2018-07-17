@@ -1,7 +1,12 @@
 !Thanks to  https://sdkmvx.wordpress.com/2008/08/13/rxvt-unicode-terminal-colors/
 
 URxvt.foreground: #f2f2f2
-URxvt.background: #101010
+! if using a compositor such as compton and desiring transparency
+URxvt.depth: 32
+URxvt.background: rgba:0000/0000/0000/A444
+! if not using a compositor:
+! URxvt.transparent: true
+! URxvt.shading: 30
 
 ! Normal
 ! color0    black
