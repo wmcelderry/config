@@ -23,6 +23,8 @@ function listSW()
 		asunder
 		wodim
 		inkscape
+		gnuplot
+		whois
 		EOF
 }
 
