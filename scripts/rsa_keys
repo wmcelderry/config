@@ -1,0 +1,12 @@
+#generate private key:
+	openssl genpkey -out mykey -algorithm rsa -pkeyopt rsa_keygen_bits:2048
+
+#generate public key
+	openssl rsa -pubout -in mykey -out mykey.pub
+
+
+#encrypt data:
+	openssl rsautl -inkey mykey.pub -pubin -encrypt -pkcs -in infile -out infile.enc
+
+#decrypt:
+	openssl rsautl -inkey mykey -decrypt -pkcs -in infile.enc -out infile.dec
