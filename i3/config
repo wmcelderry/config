@@ -545,5 +545,5 @@ mode disableKeys {
 
 
 #autostart:
-exec xinput set-int-prop "DELL07E6:00 06CB:76AF Touchpad" 276 8 1
+exec xinput set-prop 'DELL07E6:00 06CB:76AF Touchpad' --type=int --format=8 'libinput Tapping Enabled' 1
 exec /home/will/scripts/log_batt.sh
