@@ -148,13 +148,18 @@ mode "launch" {
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
 	bindsym Shift+d exec dmenu_run
-	bindsym d exec --no-startup-id i3-dmenu-desktop; mode "default"
-	bindsym Space exec --no-startup-id i3-dmenu-desktop; mode "default"
+	bindsym d mode "dev"
+	bindsym space exec --no-startup-id i3-dmenu-desktop; mode "default"
 
 	bindsym Escape mode default
 	bindsym Return mode default
 }
 
+mode "dev" {
+	bindsym a exec arduino; mode default
+	bindsym Escape mode default
+	bindsym Return mode default
+}
 #make it easy to get to quick access configurations & documents
 bindsym $mod+q mode "quick"
 mode "quick" {
