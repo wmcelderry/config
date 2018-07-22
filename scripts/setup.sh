@@ -13,6 +13,9 @@ function listSW()
 		cifs-utils
 		vifm
 		sshfs
+		bridge-utils
+		lsof
+		tcpdump
 	EOF
 #apps:
 	cat <<-EOF
@@ -26,7 +29,7 @@ function listSW()
 		wodim
 		kicad
 		feh
-		qemu
+		qemu-kvm
 	EOF
 #dev tools:
 	cat <<-EOF
@@ -49,6 +52,11 @@ function listSW()
 	cat <<-EOF
 		wireless-tools
 		wpasupplicant
+		hostapd
+	EOF
+#bluetooth support:
+	cat <<-EOF
+		bluez
 	EOF
 #audio support
 	cat <<-EOF
@@ -74,6 +82,71 @@ function installArduino()
 	sudo ln -s /usr/local/arduino-${VER}/adruino /usr/local/bin
 
 	rm arduino-${VER}-linux64.tar.xz
+
+	sudo tee -a /usr/local/arduino-${VER}/hardware/avr/boards.txt <<-EOF
+##############################################################
+
+modOsc.name=ModifiedOscilator
+modOsc.upload.tool=avrdude
+modOsc.upload.protocol=arduino
+
+modOsc.bootloader.tool=avrdude
+modOsc.bootloader.unlock_bits=0x3F
+modOsc.bootloader.lock_bits=0x0F
+
+modOsc.build.board=AVR_PRO
+modOsc.build.core=arduino
+modOsc.build.variant=eightanaloginputs
+
+## Arduino board (16 MHz external) w/ ATmega328
+## -------------------------------------------------
+modOsc.menu.cpu.16MHzexternal=ATmega328 (5V, 16 MHz external xtal)
+
+modOsc.menu.cpu.16MHzexternal.upload.maximum_size=30720
+modOsc.menu.cpu.16MHzexternal.upload.maximum_data_size=2048
+modOsc.menu.cpu.16MHzexternal.upload.speed=57600
+
+modOsc.menu.cpu.16MHzexternal.bootloader.low_fuses=0xFF
+modOsc.menu.cpu.16MHzexternal.bootloader.high_fuses=0xDA
+modOsc.menu.cpu.16MHzexternal.bootloader.extended_fuses=0x05
+modOsc.menu.cpu.16MHzexternal.bootloader.file=atmega/ATmegaBOOT_168_atmega328.hex
+
+modOsc.menu.cpu.16MHzexternal.build.mcu=atmega328p
+modOsc.menu.cpu.16MHzexternal.build.f_cpu=16000000L
+
+## Arduino board (8 MHz internal) w/ ATmega328
+## -------------------------------------------------
+modOsc.menu.cpu.8MHzinternal=ATmega328 (?V, 8 MHz internal osc)
+
+modOsc.menu.cpu.8MHzinternal.upload.maximum_size=30720
+modOsc.menu.cpu.8MHzinternal.upload.maximum_data_size=2048
+modOsc.menu.cpu.8MHzinternal.upload.speed=57600
+
+modOsc.menu.cpu.8MHzinternal.bootloader.low_fuses=0xE2
+modOsc.menu.cpu.8MHzinternal.bootloader.high_fuses=0xDA
+modOsc.menu.cpu.8MHzinternal.bootloader.extended_fuses=0x05
+modOsc.menu.cpu.8MHzinternal.bootloader.file=atmega/ATmegaBOOT_168_atmega328_8Mhzint.hex
+
+modOsc.menu.cpu.8MHzinternal.build.mcu=atmega328p
+modOsc.menu.cpu.8MHzinternal.build.f_cpu=8000000L
+
+## Arduino board (1 MHz internal) w/ ATmega328
+## -------------------------------------------------
+modOsc.menu.cpu.1MHzInternal=ATmega328 (?V, 1 MHz Internal, No BoD)
+
+modOsc.menu.cpu.1MHzInternal.upload.maximum_size=30720
+modOsc.menu.cpu.1MHzInternal.upload.maximum_data_size=2048
+modOsc.menu.cpu.1MHzInternal.upload.speed=9600
+
+modOsc.menu.cpu.1MHzInternal.bootloader.low_fuses=0x62
+modOsc.menu.cpu.1MHzInternal.bootloader.high_fuses=0xDA
+modOsc.menu.cpu.1MHzInternal.bootloader.extended_fuses=0x07
+modOsc.menu.cpu.1MHzInternal.bootloader.file=atmega/ATmegaBOOT_168_atmega328_1Mhzint.hex
+
+modOsc.menu.cpu.1MHzInternal.build.mcu=atmega328p
+modOsc.menu.cpu.1MHzInternal.build.f_cpu=1000000L
+
+EOF
 
 }
 
