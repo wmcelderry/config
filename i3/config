@@ -165,7 +165,7 @@ bindsym $mod+q mode "quick"
 mode "quick" {
 
 	bindsym t exec $TERM  -e /usr/bin/vim /home/will/todo; mode "default"
-	bindsym l exec $TERM  -e /usr/bin/vim /home/will/pigs/labbook/$(date +%Y%m%d.txt); mode "default"
+	bindsym l exec $TERM  -e /usr/bin/vim /home/will/labbook/$(date +%Y%m%d.txt); mode "default"
 	bindsym w exec $TERM  -e /home/will/scripts/work_setup.sh; mode "default"
 
 	bindsym Escape mode default
