@@ -1,3 +1,8 @@
+#HelpText
+#Default mode:
+# the normally active mode.  Almost all Key symbols use th modifier key selected ($mod) and then more.
+# there are the following modes:
+#/HT
 
 
 
@@ -69,6 +74,7 @@ mode "monitor" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh monitor ; mode "default"
 }
 
 
@@ -98,6 +104,7 @@ mode "sound" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh sound ; mode "default"
 }
 
 
@@ -111,6 +118,7 @@ mode "config" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh config ; mode "default"
 }
 
 #make it easy to reconfigure network in common ways:
@@ -120,6 +128,7 @@ mode "net" {
 
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh net ; mode "default"
 }
 
 #make it easy to launch common applications
@@ -153,12 +162,14 @@ mode "launch" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh launch ; mode "default"
 }
 
 mode "dev" {
 	bindsym a exec arduino; mode default
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh dev ; mode "default"
 }
 #make it easy to get to quick access configurations & documents
 bindsym $mod+q mode "quick"
@@ -170,6 +181,7 @@ mode "quick" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh quick ; mode "default"
 }
 
 
@@ -184,6 +196,7 @@ mode "print screen"
 	bindsym 3 exec /home/will/scripts/XCapture.sh "DVI-I-2-2"; mode default
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh "print screen" ; mode "default"
 }
 #exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
@@ -390,6 +403,7 @@ mode "mark" {
 	bindsym Down focus down
 	bindsym Up focus up
 	bindsym Right focus right
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh mark ; mode "default"
 }
 
 
@@ -424,6 +438,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 #resize windows in layout.
+bindsym $mod+r mode "resize"
 mode "resize" {
         bindsym h           resize shrink width 10 px or 10 ppt
         bindsym j           resize grow height 10 px or 10 ppt
@@ -437,9 +452,9 @@ mode "resize" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh resize ; mode "default"
 }
 
-bindsym $mod+r mode "resize"
 
 ###
 # Scratchpad 
@@ -546,7 +561,9 @@ bindsym $mod+$cmod+space exec i3-input -F 'rename workspace to "%s"' -P "Enter n
 bindsym $mod+Control+Shift+Escape mode disableKeys
 mode disableKeys {
 	bindsym $mod+Control+Shift+Escape mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh "disableKeys" ; mode "default"
 }
 
+bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh default ; mode "default"
 
 exec /home/will/scripts/log_batt.sh
