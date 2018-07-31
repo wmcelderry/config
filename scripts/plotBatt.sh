@@ -9,7 +9,7 @@ set format x "%d-%m %H:%M"
 
 set xdata time
 set style line 1 lt 1 lw 1
-plot "battery.log" using 1:4 w l ls 1
+plot "~/battery.log" using 1:4 w l ls 1
 
 
 pause -1
