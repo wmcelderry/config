@@ -10,6 +10,13 @@
 # System setup #
 ################
 
+#configure screens:
+set $left LVDS-1
+set $mid DVI-I-2-2
+set $right DVI-I-1-1
+
+
+#configure apps
 set $BROWSER firefox
 set $BROWSER_WINCLASS Firefox
 
@@ -61,9 +68,47 @@ bar {
 #make it easy to change the monitor
 bindsym $mod+m mode "monitor"
 mode "monitor" {
-	bindsym Control+u exec /home/will/scripts/usbMonitors.sh 1 ; mode "default"
+	bindsym Control+u exec /home/will/scripts/usbMonitors.sh 2 ; mode "default"
 	bindsym Control+m exec $MONITOR_UPDATE ; mode "default"
 	bindsym Control+o exec $MONITOR_OFF ; mode "default"
+	bindsym b mode "brightness"
+
+#relative movement:
+#focus (nomod), container (Shift), workspace (Ctrl)
+	bindsym Left focus output left
+	bindsym Right focus output right
+	bindsym h focus output left
+	bindsym l focus output right
+
+	bindsym shift+Left move container to output left; focus output left
+	bindsym shift+Right move container to output right; focus output right
+	bindsym shift+h move container to output left; focus output left
+	bindsym shift+l move container to output right; focus output right
+
+	bindsym Control+h move workspace to output left
+	bindsym Control+l move workspace to output right
+	bindsym Control+Left move workspace to output left
+	bindsym Control+Right move workspace to output right
+
+#absolute movement:
+#focus (nomod), container (Shift), workspace (Ctrl)
+	bindsym 1 focus output $left
+	bindsym 2 focus output $mid
+	bindsym 3 focus output $right
+
+	bindsym shift+1 move container to output $left
+	bindsym shift+2 move container to output $mid
+	bindsym shift+3 move container to output $right
+
+	bindsym Control+1 move workspace to output $left
+	bindsym Control+2 move workspace to output $mid
+	bindsym Control+3 move workspace to output $right
+
+	bindsym Escape mode default
+	bindsym Return mode default
+}
+
+mode "brightness" {
 	bindsym 9 exec $BRIGHTNESS 976 ; mode "default"
 	bindsym 7 exec $BRIGHTNESS 500 ; mode "default"
 	bindsym 5 exec $BRIGHTNESS 200 ; mode "default"
@@ -210,6 +255,7 @@ mode "print screen"
 	bindsym 1 exec /home/will/scripts/XCapture.sh "eDP-1"; mode default
 	bindsym 2 exec /home/will/scripts/XCapture.sh "DVI-I-1-1"; mode default
 	bindsym 3 exec /home/will/scripts/XCapture.sh "DVI-I-2-2"; mode default
+	bindsym --release l exec bash -c 'xwd -root | convert xwd:- "$HOME/Pictures/i3lockbg.png" ' ; mode default
 	bindsym Escape mode default
 	bindsym Return mode default
 	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh "print screen" ; mode "default"
@@ -241,6 +287,7 @@ bindsym $mod+$cmod+p exec "i3-nagbar -t warning -m 'You pressed the power off sh
 bindsym Mod1+Control+Delete exec "i3-nagbar -t warning -m 'You pressed the reboot shortcut. Do you really want to reboot this computer?' -b 'Yes, reboot NOW!' 'sudo /sbin/reboot'"
 bindsym $mod+$cmod+l exec i3lock -c 111111
 #lock that looks like the screen is unlocked...
+#bindsym $mod+$cmod+shift+l exec bash -c 'xwd -root | convert xwd:- "$HOME/Pictures/i3lockbg.png"; i3lock -u -p default -i ~/Pictures/i3lockbg.png'
 bindsym $mod+$cmod+shift+l exec i3lock -u -p default -i ~/Pictures/i3lockbg.png
 
 
@@ -550,12 +597,7 @@ bindsym $mod+shift+8 move container to workspace number $wsn8
 bindsym $mod+shift+9 move container to workspace number $wsn9
 bindsym $mod+shift+0 move container to workspace number $wsn0
 
-bindsym $mod+minus focus output left
-bindsym $mod+plus focus output right
-bindsym $mod+shift+minus move container to output left; focus output left
-bindsym $mod+shift+plus move container to output right; focus output right
-bindsym $mod+Control+minus move workspace to output left
-bindsym $mod+Control+equal move workspace to output right
+
 
 bindsym $mod+$cmod+space exec i3-input -F 'rename workspace to "%s"' -P "Enter new workspace name: "
 
