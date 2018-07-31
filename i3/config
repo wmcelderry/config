@@ -396,29 +396,19 @@ mode "mark" {
 	bindsym Shift+minus [con_mark="_3"] move scratchpad, scratchpad show, floating toggle , unmark "_3" , mark --add "_0"; [con_mark="_2"] unmark "_2", mark --add "_3" ; [con_mark="_1"] unmark _1, mark --add "_2" ; [con_mark="_0"] unmark _0, mark --add "_1";  mode "default"
 	bindsym Control+minus mark --add "_1" ;  mode "default"
  
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
 
-	bindsym Shift+h move left
-	bindsym Shift+j move down
-	bindsym Shift+k move up
-	bindsym Shift+l move right
+	bindsym Left focus left
+	bindsym Down focus down
+	bindsym Up focus up
+	bindsym Right focus right
 
 	bindsym Shift+Left move left
 	bindsym Shift+Down move down
 	bindsym Shift+Up move up
 	bindsym Shift+Right move right
 
-	#now assigned to tags.
-	#bindsym h focus left
-	#bindsym j focus down
-	#bindsym k focus up
-	#bindsym l focus right
-
-	bindsym Left focus left
-	bindsym Down focus down
-	bindsym Up focus up
-	bindsym Right focus right
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
 	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh mark ; mode "default"
 }
 
