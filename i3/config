@@ -106,6 +106,7 @@ mode "monitor" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh monitor ; mode "default"
 }
 
 mode "brightness" {
@@ -119,7 +120,7 @@ mode "brightness" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
-	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh monitor ; mode "default"
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh brightness ; mode "default"
 }
 
 
