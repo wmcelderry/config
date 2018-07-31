@@ -215,7 +215,6 @@ mode "print screen"
 	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh "print screen" ; mode "default"
 }
 #exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
 
 
