@@ -180,6 +180,9 @@ mode "quick" {
 	bindsym t exec $TERM  -e /usr/bin/vim /home/will/todo; mode "default"
 	bindsym l exec $TERM  -e /usr/bin/vim /home/will/labbook/$(date +%Y%m%d.txt); mode "default"
 	bindsym w exec $TERM  -e /home/will/scripts/work_setup.sh; mode "default"
+	bindsym h exec $TERM  -e /usr/bin/vim ~/.bash_history; mode "default"
+	bindsym v exec $TERM  -e /usr/bin/vim ~/.vimrc; mode "default"
+	bindsym b exec $TERM  -e /usr/bin/vim ~/.bashrc; mode "default"
 
 	bindsym Escape mode default
 	bindsym Return mode default
