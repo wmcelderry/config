@@ -17,6 +17,9 @@ function listSW()
 		bridge-utils
 		lsof
 		tcpdump
+		upower
+		openssh-server
+		openvpn
 	EOF
 #apps:
 	cat <<-EOF
@@ -31,6 +34,7 @@ function listSW()
 		kicad
 		feh
 		qemu-kvm
+		linphone
 	EOF
 #dev tools:
 	cat <<-EOF

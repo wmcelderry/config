@@ -1,3 +1,8 @@
+#HelpText
+#Default mode:
+# the normally active mode.  Almost all Key symbols use th modifier key selected ($mod) and then more.
+# there are the following modes:
+#/HT
 
 
 
@@ -69,6 +74,7 @@ mode "monitor" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh monitor ; mode "default"
 }
 
 
@@ -98,6 +104,7 @@ mode "sound" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh sound ; mode "default"
 }
 
 
@@ -105,21 +112,25 @@ mode "sound" {
 bindsym $mod+c mode "config"
 mode "config" {
 	bindsym r reload
-	bindsym w exec $TERM -e /usr/bin/sudo vim /etc/wpa_supplicant/wpa_supplicant.conf; mode "default"
 	bindsym s exec $TERM -e /usr/bin/vim /home/will/scripts/setup.sh; mode "default"
 	bindsym i exec $TERM -e /usr/bin/vim /home/will/config/i3/config; mode "default"
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh config ; mode "default"
 }
 
 #make it easy to reconfigure network in common ways:
 bindsym $mod+n mode "net"
 mode "net" {
-	bindsym n exec $TERM -e /home/will/scripts/renewIP.sh ; mode "default"
+	bindsym n exec /usr/bin/sudo /home/will/scripts/auth_net_actions.sh renew ; mode "default"
+	bindsym c exec $TERM -e /usr/bin/sudo /home/will/scripts/auth_net_actions.sh reconfigure ; mode "default"
+	bindsym r exec /usr/bin/sudo /home/will/scripts/auth_net_actions.sh reload ; mode "default"
+	bindsym s exec $TERM -e /usr/bin/sudo /home/will/scripts/auth_net_actions.sh scan ; mode "default"
 
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh net ; mode "default"
 }
 
 #make it easy to launch common applications
@@ -153,12 +164,14 @@ mode "launch" {
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh launch ; mode "default"
 }
 
 mode "dev" {
 	bindsym a exec arduino; mode default
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh dev ; mode "default"
 }
 #make it easy to get to quick access configurations & documents
 bindsym $mod+q mode "quick"
@@ -167,9 +180,24 @@ mode "quick" {
 	bindsym t exec $TERM  -e /usr/bin/vim /home/will/todo; mode "default"
 	bindsym l exec $TERM  -e /usr/bin/vim /home/will/labbook/$(date +%Y%m%d.txt); mode "default"
 	bindsym w exec $TERM  -e /home/will/scripts/work_setup.sh; mode "default"
+	bindsym h exec $TERM  -e /usr/bin/vim ~/.bash_history; mode "default"
+	bindsym v exec $TERM  -e /usr/bin/vim ~/.vimrc; mode "default"
+	bindsym b exec $TERM  -e /usr/bin/vim ~/.bashrc; mode "default"
 
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh quick ; mode "default"
+}
+
+bindsym $mod+x mode "vpn"
+mode "vpn" {
+
+	bindsym l exec $TERM	-e /usr/bin/sudo systemctl start openvpn@lucknet.service; mode "default"
+	bindsym Control+l exec $TERM	-e /usr/bin/sudo systemctl stop openvpn@lucknet.service; mode "default"
+
+	bindsym Escape mode default
+	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh vpn ; mode "default"
 }
 
 
@@ -184,9 +212,9 @@ mode "print screen"
 	bindsym 3 exec /home/will/scripts/XCapture.sh "DVI-I-2-2"; mode default
 	bindsym Escape mode default
 	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh "print screen" ; mode "default"
 }
 #exec bash -c 'xwd -root | convert -crop 1920x1200+0+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
-bindsym --release Mod1+Print exec bash -c 'xwd -root | convert -crop 1920x1200+1920+0 - "$HOME/Pictures/Screenshot-$(date +"%y-%m-%d_%H:%M:%S").png" '
 
 
 
@@ -367,29 +395,20 @@ mode "mark" {
 	bindsym Shift+minus [con_mark="_3"] move scratchpad, scratchpad show, floating toggle , unmark "_3" , mark --add "_0"; [con_mark="_2"] unmark "_2", mark --add "_3" ; [con_mark="_1"] unmark _1, mark --add "_2" ; [con_mark="_0"] unmark _0, mark --add "_1";  mode "default"
 	bindsym Control+minus mark --add "_1" ;  mode "default"
  
-	bindsym Escape mode "default"
-	bindsym Return mode "default"
 
-	bindsym Shift+h move left
-	bindsym Shift+j move down
-	bindsym Shift+k move up
-	bindsym Shift+l move right
+	bindsym Left focus left
+	bindsym Down focus down
+	bindsym Up focus up
+	bindsym Right focus right
 
 	bindsym Shift+Left move left
 	bindsym Shift+Down move down
 	bindsym Shift+Up move up
 	bindsym Shift+Right move right
 
-	#now assigned to tags.
-	#bindsym h focus left
-	#bindsym j focus down
-	#bindsym k focus up
-	#bindsym l focus right
-
-	bindsym Left focus left
-	bindsym Down focus down
-	bindsym Up focus up
-	bindsym Right focus right
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh mark ; mode "default"
 }
 
 
@@ -424,6 +443,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 #resize windows in layout.
+bindsym $mod+r mode "resize"
 mode "resize" {
         bindsym h           resize shrink width 10 px or 10 ppt
         bindsym j           resize grow height 10 px or 10 ppt
@@ -437,9 +457,9 @@ mode "resize" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh resize ; mode "default"
 }
 
-bindsym $mod+r mode "resize"
 
 ###
 # Scratchpad 
@@ -546,8 +566,10 @@ bindsym $mod+$cmod+space exec i3-input -F 'rename workspace to "%s"' -P "Enter n
 bindsym $mod+Control+Shift+Escape mode disableKeys
 mode disableKeys {
 	bindsym $mod+Control+Shift+Escape mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh "disableKeys" ; mode "default"
 }
 
+bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh default ; mode "default"
 
 #autostart:
 exec xinput set-prop 'DELL07E6:00 06CB:76AF Touchpad' --type=int --format=8 'libinput Tapping Enabled' 1

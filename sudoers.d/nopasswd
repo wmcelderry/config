@@ -1,5 +1,6 @@
 
 Cmnd_Alias BRIGHTNESS=/usr/bin/tee /sys/devices/pci0000\:00/0000\:00\:02.0/drm/card0/card0-eDP-1/intel_backlight/brightness
 Cmnd_Alias POWER=/sbin/poweroff, /sbin/reboot
+Cmnd_Alias NETWORK=/home/will/scripts/auth_net_actions.sh
 
-will ALL=(ALL:ALL) ALL, NOPASSWD: BRIGHTNESS, POWER
+will ALL=(ALL:ALL) ALL, NOPASSWD: BRIGHTNESS, POWER, NETWORK

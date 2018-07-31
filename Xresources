@@ -47,3 +47,5 @@ URxvt.color14:    #d7d9fc
 URxvt.color15:    #e2e2e2
 
 URxvt*scrollBar: false
+
+! URxvt*font: 9x15bold
