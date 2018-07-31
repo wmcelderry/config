@@ -11,7 +11,7 @@
 ################
 
 #configure screens:
-set $left LVDS-1
+set $left eDP-1
 set $mid DVI-I-2-2
 set $right DVI-I-1-1
 
