@@ -112,7 +112,6 @@ mode "sound" {
 bindsym $mod+c mode "config"
 mode "config" {
 	bindsym r reload
-	bindsym w exec $TERM -e /usr/bin/sudo vim /etc/wpa_supplicant/wpa_supplicant.conf; mode "default"
 	bindsym s exec $TERM -e /usr/bin/vim /home/will/scripts/setup.sh; mode "default"
 	bindsym i exec $TERM -e /usr/bin/vim /home/will/config/i3/config; mode "default"
 
@@ -124,7 +123,10 @@ mode "config" {
 #make it easy to reconfigure network in common ways:
 bindsym $mod+n mode "net"
 mode "net" {
-	bindsym n exec $TERM -e /home/will/scripts/renewIP.sh ; mode "default"
+	bindsym n exec /usr/bin/sudo /home/will/scripts/auth_net_actions.sh renew ; mode "default"
+	bindsym c exec $TERM -e /usr/bin/sudo /home/will/scripts/auth_net_actions.sh reconfigure ; mode "default"
+	bindsym r exec /usr/bin/sudo /home/will/scripts/auth_net_actions.sh reload ; mode "default"
+	bindsym s exec $TERM -e /usr/bin/sudo /home/will/scripts/auth_net_actions.sh scan ; mode "default"
 
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
