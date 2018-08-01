@@ -173,11 +173,23 @@ mode "net" {
 	bindsym c exec $TERM -e /usr/bin/sudo /home/will/scripts/auth_net_actions.sh reconfigure ; mode "default"
 	bindsym r exec /usr/bin/sudo /home/will/scripts/auth_net_actions.sh reload ; mode "default"
 	bindsym s exec $TERM -e /usr/bin/sudo /home/will/scripts/auth_net_actions.sh scan ; mode "default"
+	bindsym v mode "net_vpn"
 
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
 	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh net ; mode "default"
 }
+
+mode "net_vpn" {
+
+	bindsym l exec $TERM	-e /usr/bin/sudo systemctl start openvpn@lucknet.service; mode "default"
+	bindsym Control+l exec $TERM	-e /usr/bin/sudo systemctl stop openvpn@lucknet.service; mode "default"
+
+	bindsym Escape mode default
+	bindsym Return mode default
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh net_vpn ; mode "default"
+}
+
 
 #make it easy to launch common applications
 # easiest of all: terminal
@@ -205,7 +217,7 @@ mode "launch" {
 	bindsym o exec QT_QPA_PLATFORMTHEME= openscad ; mode "default"
 
 	bindsym Shift+d exec dmenu_run
-	bindsym d mode "dev"
+	bindsym d mode "launch_dev"
 	bindsym space exec --no-startup-id i3-dmenu-desktop; mode "default"
 
 	bindsym Escape mode default
@@ -213,11 +225,11 @@ mode "launch" {
 	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh launch ; mode "default"
 }
 
-mode "dev" {
+mode "launch_dev" {
 	bindsym a exec arduino; mode default
 	bindsym Escape mode default
 	bindsym Return mode default
-	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh dev ; mode "default"
+	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh launch_dev ; mode "default"
 }
 #make it easy to get to quick access configurations & documents
 bindsym $mod+q mode "quick"
@@ -233,17 +245,6 @@ mode "quick" {
 	bindsym Escape mode default
 	bindsym Return mode default
 	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh quick ; mode "default"
-}
-
-bindsym $mod+x mode "vpn"
-mode "vpn" {
-
-	bindsym l exec $TERM	-e /usr/bin/sudo systemctl start openvpn@lucknet.service; mode "default"
-	bindsym Control+l exec $TERM	-e /usr/bin/sudo systemctl stop openvpn@lucknet.service; mode "default"
-
-	bindsym Escape mode default
-	bindsym Return mode default
-	bindsym $mod+slash exec $TERM -e /home/will/scripts/help.sh vpn ; mode "default"
 }
 
 
