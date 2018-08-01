@@ -20,6 +20,6 @@ case "$mode" in
 		)| less
 		;;
 	*)
-		sed -n '/mode "'"${mode}"'"/,/^}/p' ~/config/i3/config | less
+		sed -n '/^mode "'"${mode}"'"/,/^}/p' ~/config/i3/config | less
 		;;
 esac
